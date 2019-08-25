@@ -38,60 +38,23 @@
 </template>
 
 <script>
-import { createNamespacedHelpers } from 'vuex'
-import store from '~/components/Stores/Form/store'
+import { i18n } from './constants'
+import useId from './hooks/useId'
+import useForm from './hooks/useForm'
 import components from '~/components/Stores/Form/components'
-
-const { mapActions } = createNamespacedHelpers('stores')
 
 export default {
   name: 'StoresDetail',
   components,
-  data() {
-    return {
-      store
-    }
-  },
-  computed: {
-    id() {
-      return this.$route.params.id
-    },
-    hasId() {
-      return Boolean(this.id)
-    },
-    i18n() {
-      return [
-        { k: 'ko', v: '한국어' },
-        { k: 'en', v: 'English' },
-        { k: 'ja', v: '日本語' },
-        { k: 'zh-Hans', v: '中文(简体)' },
-        { k: 'zh-Hant', v: '中文(繁體)' }
-      ].map(item => ({
-        k: item.k,
-        v: item.v
-      }))
-    }
-  },
-  async fetch({ store, params }) {
-    await store.dispatch('stores/fetchItem', params.id)
-  },
-  async mounted() {
-    if (this.hasId) {
-      const form = await this.fetchItem(this.id)
-      store.form = form
-    }
-  },
-  methods: {
-    ...mapActions(['fetchItem', 'patchItem']),
-    async onSubmit() {
-      if (this.hasId) {
-        await this.patchItem({
-          id: this.id,
-          fields: this.store.form
-        })
+  setup(_, { root }) {
+    const { id, hasId } = useId(root)
+    const { store, onSubmit } = useForm(id, hasId, root)
 
-        this.$router.push('/stores')
-      }
+    return {
+      i18n,
+      hasId,
+      store,
+      onSubmit
     }
   }
 }

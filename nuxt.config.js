@@ -15,6 +15,7 @@ export default {
   css: [],
   plugins: [
     '~/plugins/axios',
+    '~/plugins/vue-composition-api',
     '~/plugins/vue-components',
     '~/plugins/vue-js-modal',
     '~/plugins/vue-progressbar',

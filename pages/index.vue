@@ -4,8 +4,8 @@
 
 <script>
 export default {
-  beforeCreate() {
-    this.$router.push('/stores')
+  setup(_, { root }) {
+    root.$router.push('/stores')
   }
 }
 </script>

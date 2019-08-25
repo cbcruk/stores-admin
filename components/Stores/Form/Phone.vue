@@ -9,16 +9,21 @@
 </template>
 
 <script>
+import { computed } from '@vue/composition-api'
+
 export default {
   name: 'FormPhone',
-  computed: {
-    isSeoul() {
-      return this.$attrs.value.startsWith('02')
-    },
-    mask() {
-      return this.isSeoul
+  setup(_, context) {
+    const mask = computed(() => {
+      const isSeoul = context.attrs.value.startsWith('02')
+
+      return isSeoul
         ? ['##-###-####', '##-####-####']
         : ['###-###-####', '###-####-####']
+    })
+
+    return {
+      mask
     }
   }
 }

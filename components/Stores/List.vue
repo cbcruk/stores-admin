@@ -1,11 +1,12 @@
 <template>
   <table class="table">
     <ListHead />
-    <ListBody v-bind="$attrs" />
+    <ListBody :items="items" />
   </table>
 </template>
 
 <script>
+import { computed } from '@vue/composition-api'
 import ListHead from './List/Head.vue'
 import ListBody from './List/Body.vue'
 
@@ -15,6 +16,9 @@ export default {
     ListHead,
     ListBody
   },
-  inheritAttrs: false
+  setup(_, { root }) {
+    const items = computed(() => root.$store.getters['stores/items'])
+    return { items }
+  }
 }
 </script>

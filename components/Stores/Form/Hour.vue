@@ -18,11 +18,10 @@
 </template>
 
 <script>
-import input from '@/components/Form/mixins/input'
+import useInput from '@/components/Form/hooks/useInput'
 
 export default {
   name: 'FormHour',
-  mixins: [input],
   props: {
     isStart: {
       type: Boolean,
@@ -40,6 +39,11 @@ export default {
           class: 'input'
         }
       }
+    }
+  },
+  setup(_, context) {
+    return {
+      ...useInput(context)
     }
   }
 }

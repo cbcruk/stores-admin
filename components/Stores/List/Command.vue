@@ -1,14 +1,12 @@
 <template>
   <div class="field is-grouped">
     <p class="control">
-      <RouterLink :to="`/stores/${id}`" class="button is-primary">
-        수정
-      </RouterLink>
+      <RouterLink :to="`/stores/${id}`" class="button is-primary"
+        >수정</RouterLink
+      >
     </p>
     <p class="control">
-      <a class="button is-danger" @click="handleDelete({ id, name })">
-        삭제
-      </a>
+      <a class="button is-danger" @click="handleDelete({ id, name })">삭제</a>
     </p>
   </div>
 </template>

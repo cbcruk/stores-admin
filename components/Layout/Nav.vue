@@ -14,7 +14,7 @@
         class="navbar-burger"
         aria-label="menu"
         aria-expanded="false"
-        @click="toggleNavbar"
+        @click="handleToggle"
       >
         <span aria-hidden="true" />
         <span aria-hidden="true" />
@@ -22,30 +22,22 @@
       </a>
     </div>
 
-    <div
-      class="navbar-menu"
-      :style="{ display: isShowNavbar ? 'block' : 'none' }"
-    >
+    <div class="navbar-menu" :style="{ display: isShow ? 'block' : 'none' }">
       <div class="navbar-start">
-        <RouterLink class="navbar-item" to="/stores">
-          매장 안내
-        </RouterLink>
+        <RouterLink class="navbar-item" to="/stores">매장 안내</RouterLink>
       </div>
     </div>
   </nav>
 </template>
 
 <script>
+import useToggle from './hooks/useToggle'
+
 export default {
   name: 'LayoutNav',
-  data() {
+  setup() {
     return {
-      isShowNavbar: false
-    }
-  },
-  methods: {
-    toggleNavbar() {
-      this.isShowNavbar = !this.isShowNavbar
+      ...useToggle()
     }
   }
 }

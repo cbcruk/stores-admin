@@ -8,13 +8,17 @@
 
 <script>
 import FormField from './Field.vue'
-import input from './mixins/input'
+import useInput from './hooks/useInput'
 
 export default {
   name: 'FormInput',
   components: {
     FormField
   },
-  mixins: [input]
+  setup(_, context) {
+    return {
+      ...useInput(context)
+    }
+  }
 }
 </script>

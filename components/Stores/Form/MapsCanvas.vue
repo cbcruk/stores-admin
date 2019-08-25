@@ -4,6 +4,7 @@
 
 <script>
 import { createNamespacedHelpers } from 'vuex'
+import isEqual from 'lodash/isEqual'
 
 const { mapGetters } = createNamespacedHelpers('wait')
 
@@ -47,8 +48,10 @@ export default {
   watch: {
     geo: {
       immediate: true,
-      handler(geo) {
-        this.$nextTick(() => this.initMap())
+      handler(geo, prevGeo) {
+        if (!isEqual(geo, prevGeo)) {
+          this.$nextTick(() => this.initMap())
+        }
       }
     }
   },

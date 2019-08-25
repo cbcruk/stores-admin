@@ -9,10 +9,8 @@
 </template>
 
 <script>
-import { createNamespacedHelpers } from 'vuex'
+import useWait from './hooks/useWait'
 import LayoutNav from '~/components/Layout/Nav.vue'
-
-const { mapGetters } = createNamespacedHelpers('wait')
 
 export default {
   name: 'LayoutDefault',
@@ -29,13 +27,8 @@ export default {
   components: {
     LayoutNav
   },
-  computed: {
-    ...mapGetters(['any'])
-  },
-  watch: {
-    any(isLoaded) {
-      this.$Progress[isLoaded ? 'start' : 'finish']()
-    }
+  setup(_, { root }) {
+    useWait(root)
   }
 }
 </script>
